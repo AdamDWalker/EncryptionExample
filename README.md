@@ -9,10 +9,10 @@ Create a MySQL server with a table named 'personal_info' and the column headings
 
                                 ==========================
                                 |     personal_info      |
-  ========================================================================================
-  |   ID    |   Name    |   Address   |   Postcode  |  PhoneNumber   |   MobileNumber    |
-  | int(11) |                         varchar(108)                                       |
-  ========================================================================================
+    ========================================================================================
+    |   ID    |   Name    |   Address   |   Postcode  |  PhoneNumber   |   MobileNumber    |
+    | int(11) |                         varchar(108)                                       |
+    ========================================================================================
 
   Alternatively you can import the SQL database provided in the repo.
 
