@@ -16,4 +16,5 @@ Create a MySQL server with a table named 'personal_info' and the column headings
 
   Alternatively you can import the SQL database provided in the repo.
 
+
   Then run the index.html file, input data into the forms and it should be encrypted and added to the database. The program will the base64_encode the encrypted data to echo to the browser, and decrypt this to echo out afterwards as a demo of decryption as well as encryption.
