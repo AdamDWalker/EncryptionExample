@@ -12,8 +12,9 @@
 
 
   // Encryption Properties
-  $AES_key = "TestKey"; // PHP Docs recommend generation a cryptographically safe key prior to encryption - This is only for an example
+  $AES_key = "TestKey"; // PHP Docs recommend generation of a cryptographically safe key prior to encryption - This is only for an example
   $cypher = "AES-256-CBC";
+  $AES_iv = "TestIV";
 
   $submitted_info = array("name", "address", "postcode", "phonenumber", "mobilenumber");
 
@@ -54,15 +55,18 @@
 
     // These are used for AES256, taken from php docs - http://php.net/manual/en/function.openssl-encrypt.php
     $ivlen = openssl_cipher_iv_length($cypher);
-    $iv = openssl_random_pseudo_bytes($ivlen);
+    //$iv = openssl_random_pseudo_bytes($ivlen);
 
-    foreach ($data_to_encrypt as &$data)
+
+    $key = hash("sha256", $AES_key);
+    $iv = substr(hash('sha256', $AES_iv), 0, 16);
+
+
+    foreach ($data_to_encrypt as &$data_out)
     {
-      // First use sha256
-      $data = hash("sha256", $data);
 
-      // Then use AES256
-      $data = openssl_encrypt($data, $cypher, $AES_key, $options=0, $iv);
+      $data_out = openssl_encrypt($data_out, $cypher, $key, $options=0, $iv);
+
     }
     //echo var_dump($data_to_encrypt);
 
@@ -80,6 +84,19 @@
 
     $result->execute();
     echo "Completed the thingy";
+
+
+    foreach ($data_to_encrypt as &$data_out)
+    {
+      $data_out = base64_encode($data_out);
+      echo "<br>Encrypted  -  $data_out";
+
+      $data_out = openssl_decrypt(base64_decode($data_out), $cypher, $key, $options=0, $iv);
+      echo "<br>Decrypted  -  $data_out<br>";
+
+    }
+
+
   }
   catch (PDOException $e)
   {
