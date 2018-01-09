@@ -16,6 +16,6 @@ Create a MySQL server with a table named 'personal_info' and the column headings
 
   Alternatively you can import the SQL database provided in the repo.
 
-  Then run the index.html file, input data into the forms and it should be encrypted and added to the database.
+  Add index.html and EncryptionExample.php to a WAMP server and then run the index.html file, input data into the forms and it should be encrypted and added to the database.
 
   
